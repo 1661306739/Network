@@ -1,0 +1,14 @@
+---
+- name: Gather interface status from Cisco switch
+  hosts: switches
+  gather_facts: no
+  tasks:
+
+    - name: Run 'show interface status' on Cisco switch
+      ansible.netcommon.cli_command:
+        command: show interface status
+      register: interface_status
+
+    - name: Display interface status
+      debug:
+        var: interface_status.stdout_lines
